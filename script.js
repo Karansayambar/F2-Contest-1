@@ -79,9 +79,16 @@ function updateJohnsProfession() {
 
 // 10. Profession Count
 function getTotalProfessions() {
-  const Professions = data.map(person => person.profession);
+  const professions = data.map(person => person.profession);
 
-  const professionsArray = Array.from(Professions);
+  const professionCounts = professions.reduce((counts, profession) => {
+    counts[profession] = (counts[profession] || 0) + 1;
+    return counts;
+  }, {});
 
-  console.log(professionsArray);
+  const totalDevelopers = professionCounts['developer'] || 0;
+  const totalAdmins = professionCounts['admin'] || 0;
+
+  console.log(`Total Developers: ${totalDevelopers}`);
+  console.log(`Total Admins: ${totalAdmins}`);
 }
